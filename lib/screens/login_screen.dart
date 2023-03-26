@@ -88,7 +88,7 @@ class LoginScreen extends StatelessWidget {
                 width: width * 0.1,
               ),
             ],
-          ).px(100).py16()
+          ).px(width * 0.25).py16()
         ],
       ),
     );

@@ -16,6 +16,7 @@ class SignIn extends StatelessWidget {
         title: const Text('Chatting'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Welcome Back!',
@@ -24,26 +25,41 @@ class SignIn extends StatelessWidget {
           ),
           Text(
             'Sign in to continue',
-            style:
-                TextStyle(fontSize: width * 0.04, color: Colors.black54),
-          ).pOnly(bottom: 60),
-          defaultTextField(label: 'Username', inputType: TextInputType.emailAddress, hint: 'Enter your username'),
-          defaultTextField(label: 'Password', inputType: TextInputType.visiblePassword, hint: 'Enter your password').py8(),
-          SizedBox(height: height * 0.04,),
+            style: TextStyle(fontSize: width * 0.04, color: Colors.black54),
+          ).pOnly(bottom: height * 0.08),
+          defaultTextField(
+              label: 'Username',
+              inputType: TextInputType.emailAddress,
+              hint: 'Enter your username'),
+          defaultTextField(
+                  label: 'Password',
+                  inputType: TextInputType.visiblePassword,
+                  hint: 'Enter your password')
+              .py8(),
           SizedBox(
-            width: width * 0.5,
-            child: ElevatedButton(
-              onPressed: () {},
-              style: OutlinedButton.styleFrom(
-                  backgroundColor: Colors.yellow,
-                  foregroundColor: Colors.black87),
-              child: Text(
-                'Login Now',
-                style: TextStyle(fontSize: width * 0.05),
-              ),
+            height: height * 0.04,
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Column(
+              children: [
+                SizedBox(
+                  width: width * 0.5,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: OutlinedButton.styleFrom(
+                        backgroundColor: Colors.yellow,
+                        foregroundColor: Colors.black87),
+                    child: Text(
+                      'Login Now',
+                      style: TextStyle(fontSize: width * 0.05),
+                    ),
+                  ),
+                ).pOnly(bottom: height * 0.01),
+                const Text('Forgot Password?').pOnly(bottom: height * 0.21),
+              ],
             ),
-          ).pOnly(bottom: height * 0.01),
-          const Text('Forgot Password?').pOnly(bottom: height * 0.21),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -64,11 +80,11 @@ class SignIn extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Don\'t have an account?',
                 style: TextStyle(color: Colors.black54),
               ),
-              InkWell(onTap: () {}, child: Text('Sign up')),
+              InkWell(onTap: () {}, child: const Text(' Sign up')),
             ],
           ),
         ],
