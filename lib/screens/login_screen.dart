@@ -37,8 +37,8 @@ class LoginScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {},
                   style: OutlinedButton.styleFrom(
-                      backgroundColor: Colors.yellow,
-                      foregroundColor: Colors.black),
+                      backgroundColor: const Color.fromRGBO(251, 196, 38, 1),//const Color.fromRGBO(251, 196, 38, 1),
+                      foregroundColor: Colors.black54),
                   child: Text(
                     'Login',
                     style: TextStyle(
@@ -53,7 +53,7 @@ class LoginScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) {
-                        return SignIn();
+                        return const SignIn();
                       }),
                     );
                   },

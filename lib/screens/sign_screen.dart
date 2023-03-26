@@ -61,7 +61,7 @@ class SignIn extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {},
                         style: OutlinedButton.styleFrom(
-                            backgroundColor: Colors.yellow,
+                            backgroundColor: const Color.fromRGBO(251, 196, 38, 1),
                             foregroundColor: Colors.black87),
                         child: Text(
                           'Login Now',
