@@ -15,76 +15,91 @@ class SignIn extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Chatting'),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
         children: [
-          Text(
-            'Welcome Back!',
-            style:
-                TextStyle(fontSize: width * 0.09, fontWeight: FontWeight.bold),
-          ),
-          Text(
-            'Sign in to continue',
-            style: TextStyle(fontSize: width * 0.04, color: Colors.black54),
-          ).pOnly(bottom: height * 0.08),
-          defaultTextField(
-              label: 'Username',
-              inputType: TextInputType.emailAddress,
-              hint: 'Enter your username'),
-          defaultTextField(
-                  label: 'Password',
-                  inputType: TextInputType.visiblePassword,
-                  hint: 'Enter your password')
-              .py8(),
-          SizedBox(
-            height: height * 0.04,
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: Column(
-              children: [
-                SizedBox(
-                  width: width * 0.5,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: OutlinedButton.styleFrom(
-                        backgroundColor: Colors.yellow,
-                        foregroundColor: Colors.black87),
-                    child: Text(
-                      'Login Now',
-                      style: TextStyle(fontSize: width * 0.05),
-                    ),
-                  ),
-                ).pOnly(bottom: height * 0.01),
-                const Text('Forgot Password?').pOnly(bottom: height * 0.21),
-              ],
+          Opacity(
+            opacity: 0.3,
+            child: Align(
+              alignment: Alignment.center,
+              child: Image.asset(
+                'assets/images/sign_up.png',
+                width: width,
+                height: height * 0.5,
+              ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          ).pOnly(bottom: height * 0.13),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(
-                'assets/icons/facebook.png',
-                width: width * 0.1,
+              Text(
+                'Welcome Back!',
+                style: TextStyle(
+                    fontSize: width * 0.09, fontWeight: FontWeight.bold),
               ),
-              Image.asset(
-                'assets/icons/google.png',
-                width: width * 0.1,
+              Text(
+                'Sign in to continue',
+                style: TextStyle(fontSize: width * 0.04, color: Colors.black54),
+              ).pOnly(bottom: height * 0.08),
+              defaultTextField(
+                  label: 'Username',
+                  inputType: TextInputType.emailAddress,
+                  hint: 'Enter your username'),
+              defaultTextField(
+                      label: 'Password',
+                      inputType: TextInputType.visiblePassword,
+                      hint: 'Enter your password')
+                  .py8(),
+              SizedBox(
+                height: height * 0.04,
               ),
-              Image.asset(
-                'assets/icons/linkedin.png',
-                width: width * 0.1,
+              Align(
+                alignment: Alignment.center,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: width * 0.5,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: OutlinedButton.styleFrom(
+                            backgroundColor: Colors.yellow,
+                            foregroundColor: Colors.black87),
+                        child: Text(
+                          'Login Now',
+                          style: TextStyle(fontSize: width * 0.05),
+                        ),
+                      ),
+                    ).pOnly(bottom: height * 0.01),
+                    const Text('Forgot Password?'),
+                  ],
+                ),
+              ).pOnly(bottom: height * 0.21),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Image.asset(
+                    'assets/icons/facebook.png',
+                    width: width * 0.1,
+                  ),
+                  Image.asset(
+                    'assets/icons/google.png',
+                    width: width * 0.1,
+                  ),
+                  Image.asset(
+                    'assets/icons/linkedin.png',
+                    width: width * 0.1,
+                  ),
+                ],
+              ).px(width * 0.2).py16(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Don\'t have an account?',
+                    style: TextStyle(color: Colors.black54),
+                  ),
+                  InkWell(onTap: () {}, child: const Text(' Sign up')),
+                ],
               ),
-            ],
-          ).px(width * 0.2).py16(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'Don\'t have an account?',
-                style: TextStyle(color: Colors.black54),
-              ),
-              InkWell(onTap: () {}, child: const Text(' Sign up')),
             ],
           ),
         ],

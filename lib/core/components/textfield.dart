@@ -5,7 +5,10 @@ Widget defaultTextField(
     required String hint,
     required TextInputType inputType}) {
   return TextField(
-    decoration: InputDecoration(labelText: label, hintText: hint),
+    decoration: InputDecoration(
+      labelText: label,
+      hintText: hint,
+    ),
     keyboardType: inputType,
   );
 }
