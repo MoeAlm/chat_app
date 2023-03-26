@@ -28,7 +28,7 @@ class SignIn extends StatelessWidget {
                 height: height * 0.5,
               ),
             ),
-          ).pOnly(bottom: height * 0.13),
+          ).pOnly(top: height * 0.13),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
