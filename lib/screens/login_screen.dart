@@ -2,6 +2,8 @@ import 'package:chat_app/screens/sign_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../core/constants/colors.dart';
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -37,7 +39,7 @@ class LoginScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {},
                   style: OutlinedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(251, 196, 38, 1),//const Color.fromRGBO(251, 196, 38, 1),
+                      backgroundColor: kPrimaryColor,//const Color.fromRGBO(251, 196, 38, 1),
                       foregroundColor: Colors.black54),
                   child: Text(
                     'Login',

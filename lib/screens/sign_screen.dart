@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../core/components/textfield.dart';
+import '../core/constants/colors.dart';
 
 class SignIn extends StatelessWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -61,7 +62,7 @@ class SignIn extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {},
                         style: OutlinedButton.styleFrom(
-                            backgroundColor: const Color.fromRGBO(251, 196, 38, 1),
+                            backgroundColor: kPrimaryColor,
                             foregroundColor: Colors.black87),
                         child: Text(
                           'Login Now',
