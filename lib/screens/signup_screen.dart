@@ -1,12 +1,12 @@
-import 'package:chat_app/screens/signup_screen.dart';
+import 'package:chat_app/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../core/components/textfield.dart';
 import '../core/constants/colors.dart';
 
-class LogIn extends StatelessWidget {
-  const LogIn({Key? key}) : super(key: key);
+class SignUp extends StatelessWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +34,12 @@ class LogIn extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Welcome Back!',
+                'Sign Up',
                 style: TextStyle(
                     fontSize: width * 0.09, fontWeight: FontWeight.bold),
               ),
               Text(
-                'Sign in to continue',
+                'And talk with your friends from anywhere!',
                 style: TextStyle(fontSize: width * 0.04, color: Colors.black54),
               ).pOnly(bottom: height * 0.08),
               defaultTextField(
@@ -66,12 +66,11 @@ class LogIn extends StatelessWidget {
                             backgroundColor: kPrimaryColor,
                             foregroundColor: Colors.black87),
                         child: Text(
-                          'Login Now',
+                          'Sign Up',
                           style: TextStyle(fontSize: width * 0.05),
                         ),
                       ),
                     ).pOnly(bottom: height * 0.01),
-                    const Text('Forgot Password?'),
                   ],
                 ),
               ).pOnly(bottom: height * 0.21),
@@ -96,19 +95,17 @@ class LogIn extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'Don\'t have an account?',
+                    'Already have an account?',
                     style: TextStyle(color: Colors.black54),
                   ),
-                  InkWell(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) {
-                            return const SignUp();
-                          }),
-                        );
-                      },
-                      child: const Text(' Sign up')),
+                  InkWell(onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return const LogIn();
+                      }),
+                    );
+                  }, child: const Text(' Log In')),
                 ],
               ),
             ],

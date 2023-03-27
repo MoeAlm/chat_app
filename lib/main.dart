@@ -1,4 +1,3 @@
-import 'package:chat_app/screens/login_screen.dart';
 import 'package:chat_app/screens/sign_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      home: const SignScreen(),
     );
   }
 }
