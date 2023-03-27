@@ -100,15 +100,16 @@ class LogIn extends StatelessWidget {
                     style: TextStyle(color: Colors.black54),
                   ),
                   InkWell(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) {
-                            return const SignUp();
-                          }),
-                        );
-                      },
-                      child: const Text(' Sign up')),
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return const SignUp();
+                        }),
+                      );
+                    },
+                    child: const Text(' Sign up'),
+                  ),
                 ],
               ),
             ],

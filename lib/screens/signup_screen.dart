@@ -98,14 +98,17 @@ class SignUp extends StatelessWidget {
                     'Already have an account?',
                     style: TextStyle(color: Colors.black54),
                   ),
-                  InkWell(onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) {
-                        return const LogIn();
-                      }),
-                    );
-                  }, child: const Text(' Log In')),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return const LogIn();
+                        }),
+                      );
+                    },
+                    child: const Text(' Log In'),
+                  ),
                 ],
               ),
             ],
