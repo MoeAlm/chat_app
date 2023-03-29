@@ -73,7 +73,7 @@ class SignUp extends StatelessWidget {
                     ).pOnly(bottom: height * 0.01),
                   ],
                 ),
-              ).pOnly(bottom: height * 0.21),
+              ).pOnly(bottom: height * 0.235),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
