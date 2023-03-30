@@ -74,13 +74,15 @@ class SignUp extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () async {
                           //اوبجكت لـ FirebaseAuth
-                          FirebaseAuth auth = FirebaseAuth.instance;
-                          UserCredential user =
-                              await auth.createUserWithEmailAndPassword(
-                            email: email!,
-                            password: password!,
-                          );
-                          print(user.user!.displayName);
+                          try {
+                            await registerUser();
+                          } on FirebaseAuthException catch (e) {
+                            if (e.code == "email-already-in-use") {
+                              showSnackBar(context, text: 'Email is Already exit');
+                            } else if (e.code == "weak password") {
+                              showSnackBar(context, text: 'Weak password');
+                            }
+                          }
                         },
                         style: OutlinedButton.styleFrom(
                             backgroundColor: kPrimaryColor,
@@ -135,6 +137,22 @@ class SignUp extends StatelessWidget {
           ),
         ],
       ).p(16),
+    );
+  }
+
+  void showSnackBar(BuildContext context, {required String text}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(text),
+      ),
+    );
+  }
+
+  Future<void> registerUser() async {
+     UserCredential user =
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: email!,
+      password: password!,
     );
   }
 }
