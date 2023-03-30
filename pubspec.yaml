@@ -41,6 +41,7 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.1
   firebase_core: ^2.8.0
+  firebase_auth: ^4.3.0
   velocity_x: ^3.6.0
 
 # For information on the generic Dart part of this file, see the

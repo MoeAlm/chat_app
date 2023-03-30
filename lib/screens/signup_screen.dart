@@ -1,12 +1,16 @@
 import 'package:chat_app/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../core/components/textfield.dart';
 import '../core/constants/colors.dart';
 
 class SignUp extends StatelessWidget {
-  const SignUp({Key? key}) : super(key: key);
+  SignUp({Key? key}) : super(key: key);
+
+  String? email;
+  String? password;
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +47,21 @@ class SignUp extends StatelessWidget {
                 style: TextStyle(fontSize: width * 0.04, color: Colors.black54),
               ).pOnly(bottom: height * 0.08),
               defaultTextField(
-                  label: 'Username',
-                  inputType: TextInputType.emailAddress,
-                  hint: 'Enter your username'),
+                label: 'Username',
+                inputType: TextInputType.emailAddress,
+                hint: 'Enter your username',
+                onChanged: (text) {
+                  email = text;
+                },
+              ),
               defaultTextField(
-                      label: 'Password',
-                      inputType: TextInputType.visiblePassword,
-                      hint: 'Enter your password')
-                  .py8(),
+                label: 'Password',
+                inputType: TextInputType.visiblePassword,
+                hint: 'Enter your password',
+                onChanged: (text) {
+                  password = text;
+                },
+              ).py8(),
               SizedBox(
                 height: height * 0.04,
               ),
@@ -61,7 +72,16 @@ class SignUp extends StatelessWidget {
                     SizedBox(
                       width: width * 0.5,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          //اوبجكت لـ FirebaseAuth
+                          FirebaseAuth auth = FirebaseAuth.instance;
+                          UserCredential user =
+                              await auth.createUserWithEmailAndPassword(
+                            email: email!,
+                            password: password!,
+                          );
+                          print(user.user!.displayName);
+                        },
                         style: OutlinedButton.styleFrom(
                             backgroundColor: kPrimaryColor,
                             foregroundColor: Colors.black87),

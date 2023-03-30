@@ -104,7 +104,7 @@ class LogIn extends StatelessWidget {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) {
-                          return const SignUp();
+                          return SignUp();
                         }),
                       );
                     },
