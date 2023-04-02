@@ -34,7 +34,7 @@ class ChatScreen extends StatelessWidget {
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
               style: TextStyle(color: Colors.white),
             ),
-          ).py8(),
+          ).py12(),
           ChatBubble(
             clipper: ChatBubbleClipper1(type: BubbleType.receiverBubble),
             backGroundColor: kPrimaryColor,
