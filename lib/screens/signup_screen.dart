@@ -7,6 +7,7 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import '../core/components/textformfield.dart';
 import '../core/constants/colors.dart';
 import '../helper/show_snackbar.dart';
+import 'chat_screen.dart';
 
 class SignUp extends StatefulWidget {
   SignUp({Key? key}) : super(key: key);
@@ -96,6 +97,9 @@ class _SignUpState extends State<SignUp> {
                               });
                                 try {
                                   await registerUser();
+                                  Navigator.push(context, MaterialPageRoute(builder: (context){
+                                    return ChatScreen();
+                                  }));
 
                                 } on FirebaseAuthException catch (e) {
                                   if (e.code == "email-already-in-use") {
