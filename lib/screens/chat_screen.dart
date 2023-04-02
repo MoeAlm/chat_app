@@ -38,7 +38,7 @@ class ChatScreen extends StatelessWidget {
           ChatBubble(
             clipper: ChatBubbleClipper1(type: BubbleType.receiverBubble),
             backGroundColor: kPrimaryColor,
-            child: Text(
+            child: const Text(
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
               style: TextStyle(color: Colors.white),
             ),
