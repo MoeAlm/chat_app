@@ -4,8 +4,9 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-import '../core/components/textfield.dart';
+import '../core/components/textformfield.dart';
 import '../core/constants/colors.dart';
+import '../helper/show_snackbar.dart';
 
 class SignUp extends StatefulWidget {
   SignUp({Key? key}) : super(key: key);
@@ -61,7 +62,7 @@ class _SignUpState extends State<SignUp> {
                     style: TextStyle(
                         fontSize: width * 0.04, color: Colors.black54),
                   ).pOnly(bottom: height * 0.08),
-                  defaultTextField(
+                  defaultTextFormField(
                     label: 'Username',
                     inputType: TextInputType.emailAddress,
                     hint: 'Enter your username',
@@ -69,7 +70,7 @@ class _SignUpState extends State<SignUp> {
                       email = text;
                     },
                   ),
-                  defaultTextField(
+                  defaultTextFormField(
                     label: 'Password',
                     inputType: TextInputType.visiblePassword,
                     hint: 'Enter your password',
@@ -90,11 +91,12 @@ class _SignUpState extends State<SignUp> {
                             onPressed: () async {
                               //اوبجكت لـ FirebaseAuth
                               if (formKey.currentState!.validate()) {
+                                setState(() {
+                                isLoading = true;
+                              });
                                 try {
                                   await registerUser();
-                                  setState(() {
-                                    isLoading = true;
-                                  });
+
                                 } on FirebaseAuthException catch (e) {
                                   if (e.code == "email-already-in-use") {
                                     showSnackBar(context,
@@ -166,14 +168,6 @@ class _SignUpState extends State<SignUp> {
             ),
           ],
         ).p(16),
-      ),
-    );
-  }
-
-  void showSnackBar(BuildContext context, {required String text}) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(text),
       ),
     );
   }

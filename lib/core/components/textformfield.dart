@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget defaultTextField(
+Widget defaultTextFormField(
     {required String label,
     required String hint,
     required TextInputType inputType, Function(String)? onChanged}) {
