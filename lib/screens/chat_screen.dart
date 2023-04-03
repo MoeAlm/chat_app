@@ -42,13 +42,13 @@ class ChatScreen extends StatelessWidget {
           ),
           TextField(
             decoration: InputDecoration(
-              hintText: 'Send a message',
+              hintText: 'Send a Message',
               suffixIcon: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.send,
-                    color: kPrimaryColor,
-                  ),
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.send,
+                  color: kPrimaryColor,
+                ),
               ),
               contentPadding: const EdgeInsets.all(8),
               border: OutlineInputBorder(
