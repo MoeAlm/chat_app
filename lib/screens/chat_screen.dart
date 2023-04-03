@@ -9,7 +9,6 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
@@ -29,26 +28,35 @@ class ChatScreen extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               itemCount: 10,
               itemBuilder: (BuildContext context, int index) => ChatBubble(
-              clipper: ChatBubbleClipper1(type: BubbleType.receiverBubble),
-              backGroundColor: kPrimaryColor,
-              child: const Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                style: TextStyle(color: Colors.white),
-              ),
-            ).py(10),
+                clipper: ChatBubbleClipper1(type: BubbleType.receiverBubble),
+                backGroundColor: kPrimaryColor,
+                child: const Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ).py(10),
             ).px(12),
           ),
           TextField(
             decoration: InputDecoration(
-              suffixIcon: IconButton(onPressed: (){}, icon: Icon(Icons.send, color: kPrimaryColor,)),
-              contentPadding: EdgeInsets.all(8),
+              suffixIcon: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.send,
+                    color: kPrimaryColor,
+                  )),
+              contentPadding: const EdgeInsets.all(8),
               border: OutlineInputBorder(
-                borderSide: BorderSide(),
-                borderRadius: BorderRadius.circular(15)
-              )
+                borderSide: const BorderSide(),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: kPrimaryColor),
+                borderRadius: BorderRadius.circular(15),
+              ),
             ),
           ).pSymmetric(v: 6, h: 8)
         ],
