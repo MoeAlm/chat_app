@@ -28,7 +28,7 @@ class ChatScreen extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
+              physics:  const BouncingScrollPhysics(),
               itemCount: 10,
               itemBuilder: (BuildContext context, int index) => ChatBubble(
                 clipper: ChatBubbleClipper1(type: BubbleType.receiverBubble),
