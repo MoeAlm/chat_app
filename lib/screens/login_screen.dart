@@ -93,13 +93,18 @@ class _LogInState extends State<LogIn> {
                               //اوبجكت لـ FirebaseAuth
                               if (formKey.currentState!.validate()) {
                                 setState(() {
-                                isLoading = true;
-                              });
+                                  isLoading = true;
+                                });
                                 try {
                                   await loginUser();
-                                  Navigator.push(context, MaterialPageRoute(builder: (context){
-                                    return ChatScreen();
-                                  }));
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return ChatScreen();
+                                      },
+                                    ),
+                                  );
                                 } on FirebaseAuthException catch (e) {
                                   if (e.code == "user-not-found") {
                                     showSnackBar(context,
@@ -177,7 +182,7 @@ class _LogInState extends State<LogIn> {
 
   Future<void> loginUser() async {
     UserCredential user =
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: email!,
       password: password!,
     );
