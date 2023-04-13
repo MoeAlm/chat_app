@@ -16,11 +16,11 @@ class ChatScreen extends StatelessWidget {
         FirebaseFirestore.instance.collection('Messages');
     TextEditingController controller = TextEditingController();
     double width = MediaQuery.of(context).size.width;
-    return FutureBuilder<QuerySnapshot>(
-        future: messages.get(),
+    return StreamBuilder<QuerySnapshot>(
+        stream: messages.orderBy('createdAt').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            print(snapshot.data?.docs[0]['Message']);
+            //print(snapshot.data?.docs[0]['Message']);
             List<Message> messagesList = [];
             for(int i = 0; i < snapshot.data!.docs.length; i++){
               messagesList.add(Message.fromJson(snapshot.data!.docs[i]));
@@ -62,6 +62,7 @@ class ChatScreen extends StatelessWidget {
                     onSubmitted: (value) {
                       messages.add({
                         'Message': value,
+                        'createdAt': DateTime.now()
                       });
                       controller.clear();
                     },
@@ -71,7 +72,9 @@ class ChatScreen extends StatelessWidget {
                         onPressed: () {
                           messages.add({
                             'Message': controller.text,
+                            'createdAt': DateTime.now()
                           });
+                          controller.clear();
                         },
                         icon: const Icon(
                           Icons.send,
