@@ -8,7 +8,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatScreen extends StatelessWidget {
   final String? email;
+
   ChatScreen({Key? key, this.email}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final _controller = ScrollController();
@@ -22,7 +24,6 @@ class ChatScreen extends StatelessWidget {
         stream: messages.orderBy('createdAt', descending: true).snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            //print(snapshot.data?.docs[0]['Message']);
             List<Message> messagesList = [];
             for (int i = 0; i < snapshot.data!.docs.length; i++) {
               messagesList.add(Message.fromJson(snapshot.data!.docs[i]));
@@ -49,20 +50,26 @@ class ChatScreen extends StatelessWidget {
                       controller: _controller,
                       reverse: true,
                       itemCount: messagesList.length,
-                      itemBuilder: (BuildContext context, int index) =>
-                          buildChatBubble(snapshot, index,
-                                  type: BubbleType.receiverBubble)
-                              .py(10),
+                      itemBuilder: (BuildContext context, int index) {
+                        return snapshot.data?.docs[index]['id'] == email
+                            ? buildChatBubble(snapshot, index,
+                                type: BubbleType.receiverBubble,
+                                color: Colors.yellow,
+                                align: Alignment.centerLeft)
+                            : buildChatBubble(snapshot, index,
+                                type: BubbleType.sendBubble,
+                                color: kPrimaryColor,
+                                align: Alignment.centerRight);
+                      },
                     ).px(12),
                   ),
                   TextField(
                     controller: controller,
                     onSubmitted: (value) {
-                      messages
-                          .add({
+                      messages.add({
                         'Message': value,
                         'createdAt': DateTime.now(),
-                        'id' : email,
+                        'id': email,
                       });
                       controller.clear();
                       _controller.animateTo(
@@ -78,7 +85,7 @@ class ChatScreen extends StatelessWidget {
                           messages.add({
                             'Message': controller.text,
                             'createdAt': DateTime.now(),
-                            'id' : email,
+                            'id': email,
                           });
                           controller.clear();
                         },
@@ -107,16 +114,17 @@ class ChatScreen extends StatelessWidget {
         });
   }
 
-  ChatBubble buildChatBubble(
+  Widget buildChatBubble(
       AsyncSnapshot<QuerySnapshot<Object?>> snapshot, int index,
-      {required BubbleType type}) {
+      {required BubbleType type, required color, required Alignment align}) {
     return ChatBubble(
       clipper: ChatBubbleClipper5(type: type),
-      backGroundColor: kPrimaryColor,
+      backGroundColor: color,
+      alignment: align,
       child: Text(
         '${snapshot.data?.docs[index]['Message']}',
         style: const TextStyle(color: Colors.white),
       ),
-    );
+    ).py(10);
   }
 }
