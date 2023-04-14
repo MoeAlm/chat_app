@@ -77,7 +77,8 @@ class ChatScreen extends StatelessWidget {
                         onPressed: () {
                           messages.add({
                             'Message': controller.text,
-                            'createdAt': DateTime.now()
+                            'createdAt': DateTime.now(),
+                            'id' : email,
                           });
                           controller.clear();
                         },

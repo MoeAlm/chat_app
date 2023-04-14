@@ -101,7 +101,9 @@ class _LogInState extends State<LogIn> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) {
-                                        return ChatScreen(email: email,);
+                                        return ChatScreen(
+                                          email: email,
+                                        );
                                       },
                                     ),
                                   );
