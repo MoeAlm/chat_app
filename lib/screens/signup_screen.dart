@@ -21,13 +21,14 @@ class _SignUpState extends State<SignUp> {
 
   String? password;
   GlobalKey<FormState> formKey = GlobalKey();
+  bool isLoading = false;
+  bool isVisible = true;
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    bool isLoading = false;
     return ModalProgressHUD(
       inAsyncCall: isLoading,
       child: Scaffold(
@@ -75,6 +76,16 @@ class _SignUpState extends State<SignUp> {
                     label: 'Password',
                     inputType: TextInputType.visiblePassword,
                     hint: 'Enter your password',
+                    iconButton: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          isVisible = !isVisible;
+                        });
+                      },
+                      icon: isVisible
+                          ? Icon(Icons.visibility)
+                          : Icon(Icons.visibility_off),
+                    ),
                     onChanged: (text) {
                       password = text;
                     },
@@ -93,14 +104,14 @@ class _SignUpState extends State<SignUp> {
                               //اوبجكت لـ FirebaseAuth
                               if (formKey.currentState!.validate()) {
                                 setState(() {
-                                isLoading = true;
-                              });
+                                  isLoading = true;
+                                });
                                 try {
                                   await registerUser();
-                                  Navigator.push(context, MaterialPageRoute(builder: (context){
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
                                     return ChatScreen();
                                   }));
-
                                 } on FirebaseAuthException catch (e) {
                                   if (e.code == "email-already-in-use") {
                                     showSnackBar(context,

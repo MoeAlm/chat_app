@@ -21,13 +21,14 @@ class _LogInState extends State<LogIn> {
 
   String? password;
   GlobalKey<FormState> formKey = GlobalKey();
+  bool isLoading = false;
+  bool isVisible = true;
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    bool isLoading = false;
     return ModalProgressHUD(
       inAsyncCall: isLoading,
       child: Scaffold(
@@ -75,6 +76,17 @@ class _LogInState extends State<LogIn> {
                     label: 'Password',
                     inputType: TextInputType.visiblePassword,
                     hint: 'Enter your password',
+                    iconButton: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          isVisible = !isVisible;
+                        });
+                      },
+                      icon: isVisible
+                          ? Icon(Icons.visibility)
+                          : Icon(Icons.visibility_off),
+                    ),
+                    obscureText: isVisible,
                     onChanged: (text) {
                       password = text;
                     },
