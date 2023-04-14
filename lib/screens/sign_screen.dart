@@ -21,7 +21,10 @@ class SignScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Image.asset('assets/images/Chatting.png'),
+          Image.asset(
+            'assets/images/Chatting.png',
+            height: height * 0.48,
+          ),
           Text(
             'Hello!',
             style:
@@ -47,7 +50,8 @@ class SignScreen extends StatelessWidget {
                     );
                   },
                   style: OutlinedButton.styleFrom(
-                      backgroundColor: kPrimaryColor,//const Color.fromRGBO(251, 196, 38, 1),
+                      backgroundColor: kPrimaryColor,
+                      //const Color.fromRGBO(251, 196, 38, 1),
                       foregroundColor: Colors.black54),
                   child: Text(
                     'Login',
@@ -66,7 +70,6 @@ class SignScreen extends StatelessWidget {
                         return SignUp();
                       }),
                     );
-
                   },
                   style:
                       OutlinedButton.styleFrom(foregroundColor: Colors.black),

@@ -7,22 +7,24 @@ import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatScreen extends StatelessWidget {
-  const ChatScreen({Key? key}) : super(key: key);
-
+  final String? email;
+  ChatScreen({Key? key, this.email}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final _controller = ScrollController();
+
     //FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference messages =
         FirebaseFirestore.instance.collection('Messages');
     TextEditingController controller = TextEditingController();
     double width = MediaQuery.of(context).size.width;
     return StreamBuilder<QuerySnapshot>(
-        stream: messages.orderBy('createdAt').snapshots(),
+        stream: messages.orderBy('createdAt', descending: true).snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             //print(snapshot.data?.docs[0]['Message']);
             List<Message> messagesList = [];
-            for(int i = 0; i < snapshot.data!.docs.length; i++){
+            for (int i = 0; i < snapshot.data!.docs.length; i++) {
               messagesList.add(Message.fromJson(snapshot.data!.docs[i]));
             }
             return Scaffold(
@@ -44,27 +46,30 @@ class ChatScreen extends StatelessWidget {
                   Expanded(
                     child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
+                      controller: _controller,
+                      reverse: true,
                       itemCount: messagesList.length,
                       itemBuilder: (BuildContext context, int index) =>
-                          ChatBubble(
-                            clipper:
-                            ChatBubbleClipper1(type: BubbleType.receiverBubble),
-                            backGroundColor: kPrimaryColor,
-                            child: Text(
-                              '${snapshot.data?.docs[index]['Message']}',
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ).py(10),
+                          buildChatBubble(snapshot, index,
+                                  type: BubbleType.receiverBubble)
+                              .py(10),
                     ).px(12),
                   ),
                   TextField(
                     controller: controller,
                     onSubmitted: (value) {
-                      messages.add({
+                      messages
+                          .add({
                         'Message': value,
-                        'createdAt': DateTime.now()
+                        'createdAt': DateTime.now(),
+                        'id' : email,
                       });
                       controller.clear();
+                      _controller.animateTo(
+                        0,
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.fastOutSlowIn,
+                      );
                     },
                     decoration: InputDecoration(
                       hintText: 'Send a Message',
@@ -95,9 +100,22 @@ class ChatScreen extends StatelessWidget {
                 ],
               ).pOnly(bottom: 8),
             );
-          }  else {
+          } else {
             return Scaffold(body: Center(child: CircularProgressIndicator()));
           }
         });
+  }
+
+  ChatBubble buildChatBubble(
+      AsyncSnapshot<QuerySnapshot<Object?>> snapshot, int index,
+      {required BubbleType type}) {
+    return ChatBubble(
+      clipper: ChatBubbleClipper5(type: type),
+      backGroundColor: kPrimaryColor,
+      child: Text(
+        '${snapshot.data?.docs[index]['Message']}',
+        style: const TextStyle(color: Colors.white),
+      ),
+    );
   }
 }
