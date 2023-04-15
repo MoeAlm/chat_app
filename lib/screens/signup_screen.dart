@@ -10,7 +10,7 @@ import '../helper/show_snackbar.dart';
 import 'chat_screen.dart';
 
 class SignUp extends StatefulWidget {
-  SignUp({Key? key}) : super(key: key);
+  const SignUp({Key? key}) : super(key: key);
 
   @override
   State<SignUp> createState() => _SignUpState();
@@ -83,8 +83,8 @@ class _SignUpState extends State<SignUp> {
                         });
                       },
                       icon: isVisible
-                          ? Icon(Icons.visibility)
-                          : Icon(Icons.visibility_off),
+                          ? const Icon(Icons.visibility)
+                          : const Icon(Icons.visibility_off),
                     ),
                     onChanged: (text) {
                       password = text;
@@ -110,7 +110,9 @@ class _SignUpState extends State<SignUp> {
                                   await registerUser();
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return ChatScreen();
+                                    return ChatScreen(
+                                      email: email,
+                                    );
                                   }));
                                 } on FirebaseAuthException catch (e) {
                                   if (e.code == "email-already-in-use") {
